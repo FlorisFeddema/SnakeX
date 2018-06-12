@@ -1,7 +1,5 @@
 package SnakeX.Client.Logic;
 
-import com.sun.javadoc.ThrowsTag;
-
 import java.io.IOException;
 
 public interface IsClientManagerEndPoint {
