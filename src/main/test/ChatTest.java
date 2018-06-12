@@ -1,5 +1,6 @@
-package SnakeX.Model;
-
+import SnakeX.Model.Chat;
+import SnakeX.Model.Message;
+import SnakeX.Model.Player;
 import org.junit.Before;
 import org.junit.Test;
 
