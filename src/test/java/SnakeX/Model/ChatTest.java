@@ -1,8 +1,6 @@
 package SnakeX.Model;
 
-import SnakeX.Model.Chat;
-import SnakeX.Model.Message;
-import SnakeX.Model.Player;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,6 +38,6 @@ public class ChatTest {
         Message result = chat.getLastMessage();
 
         assertSame(message1, result);
-        assertEquals(message1.getText(), message1.getText());
+        Assert.assertEquals(message1.getText(), message1.getText());
     }
 }
