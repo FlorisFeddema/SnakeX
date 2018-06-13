@@ -12,12 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
 
 import java.io.IOException;
 import java.util.Timer;
-import java.util.TimerTask;
 
 
 import static javafx.application.Platform.runLater;
@@ -117,26 +114,36 @@ public class MainController extends Controller implements IsMainController {
 
     @FXML
     public void playGame() {
-        btnPlay.setDisable(true);
 
-        try {
-            client.joinQueue();
-            lblQueue.setVisible(true);
-            timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    queueTime += 1;
-                    int queueMinute = queueTime / 60;
-                    int queueSecond = queueTime % 60;
-                    String text = "Time: " + String.format("%1$02d", queueMinute) + ":" + String.format("%1$02d", queueSecond);
-                    Platform.runLater(() -> lblTime.setText(text));
-                }
-            }, 1000, 1000);
-        } catch (IOException e) {
-            btnPlay.setDisable(false);
 
-        }
+        Platform.runLater(() -> {
+            try {
+                changeScene("Game", client);
+            } catch (IOException e) {
+                //ignore
+            }
+        });
+
+//        btnPlay.setDisable(true);
+//
+//        try {
+//            client.joinQueue();
+//            lblQueue.setVisible(true);
+//            timer = new Timer();
+//            timer.scheduleAtFixedRate(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    queueTime += 1;
+//                    int queueMinute = queueTime / 60;
+//                    int queueSecond = queueTime % 60;
+//                    String text = "Time: " + String.format("%1$02d", queueMinute) + ":" + String.format("%1$02d", queueSecond);
+//                    Platform.runLater(() -> lblTime.setText(text));
+//                }
+//            }, 1000, 1000);
+//        } catch (IOException e) {
+//            btnPlay.setDisable(false);
+//
+//        }
 
     }
 }

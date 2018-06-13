@@ -4,5 +4,5 @@ public enum CellState {
     Wall,
     Empty,
     PowerUp,
-    Taken
+    Snake
 }

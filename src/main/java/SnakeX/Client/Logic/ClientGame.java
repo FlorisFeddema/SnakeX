@@ -1,5 +1,6 @@
 package SnakeX.Client.Logic;
 
+import SnakeX.Client.UI.IsGameController;
 import SnakeX.Client.UI.IsMainController;
 import SnakeX.Model.enums.MoveDirection;
 
@@ -10,6 +11,12 @@ public class ClientGame implements IsClient, IsControllerClient {
     private IsClientManagerEndPoint managerEndPoint;
     private IsClientGameEndPoint gameEndPoint;
     private IsMainController mainController;
+
+    public void setGameController(IsGameController gameController) {
+        this.gameController = gameController;
+    }
+
+    private IsGameController gameController;
     private int wins;
     private int games;
     private String gameUrl;
