@@ -1,7 +1,5 @@
 package SnakeX.Model.Manager;
 
-import SnakeX.Model.Shared.Player;
-
 public class QueueEntry {
     private Player player;
 

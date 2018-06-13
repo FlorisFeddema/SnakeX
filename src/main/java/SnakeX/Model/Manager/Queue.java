@@ -1,6 +1,5 @@
 package SnakeX.Model.Manager;
 
-import SnakeX.Model.Shared.Player;
 import SnakeX.Model.enums.PlayerStatus;
 import java.util.ArrayList;
 import java.util.List;

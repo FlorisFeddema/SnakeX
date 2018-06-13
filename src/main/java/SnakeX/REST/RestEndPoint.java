@@ -1,6 +1,6 @@
 package SnakeX.REST;
 
-import SnakeX.Model.Shared.Player;
+import SnakeX.Model.Manager.Player;
 import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

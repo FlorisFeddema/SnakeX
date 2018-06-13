@@ -1,7 +1,7 @@
 package SnakeX.Model;
 
 import SnakeX.Model.Manager.Message;
-import SnakeX.Model.Shared.Player;
+import SnakeX.Model.Manager.Player;
 import org.junit.Before;
 import org.junit.Test;
 

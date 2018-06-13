@@ -1,10 +1,8 @@
 package SnakeX.Model.Manager;
 
-import SnakeX.GameServer.GameServer;
+import SnakeX.Model.enums.PlayerStatus;
 import SnakeX.REST.IsRestEndpoint;
 import SnakeX.REST.RestEndPoint;
-import SnakeX.Model.Shared.Player;
-import SnakeX.Model.enums.PlayerStatus;
 import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
 
