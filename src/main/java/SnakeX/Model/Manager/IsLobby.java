@@ -18,4 +18,6 @@ public interface IsLobby {
     void receiveMessage(String text, Session session);
 
     void joinQueue(Session session);
+
+    void connectServer(Session session, String url);
 }

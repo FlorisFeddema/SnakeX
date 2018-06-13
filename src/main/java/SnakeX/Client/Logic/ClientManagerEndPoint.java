@@ -59,9 +59,16 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
             stats.offer(json);
         } else if (keyInJson(json, "message")){
             receiveMessageOther(json);
+        } else if (keyInJson(json, "gameserver")){
+            joinGame(json);
         }
     }
 
+
+    private void joinGame(JsonObject json){
+        String url = json.get("url").getAsString();
+        System.out.println(ConsoleColors.GREEN + "Client: " + url);
+    }
 
     @Override
     public int loginPlayer(String name, String hash) throws IOException, InterruptedException {

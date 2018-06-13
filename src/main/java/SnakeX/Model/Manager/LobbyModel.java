@@ -1,6 +1,7 @@
 package SnakeX.Model.Manager;
 
 import SnakeX.Model.enums.PlayerStatus;
+import SnakeX.Model.enums.ServerStatus;
 import SnakeX.REST.IsRestEndpoint;
 import SnakeX.REST.RestEndPoint;
 import SnakeX.Shared.ConsoleColors;
@@ -33,15 +34,50 @@ public class LobbyModel implements IsLobby {
         }, 0, 5000);
     }
 
+    public void connectServer(Session session, String url){
+        ServerEntry entry = new ServerEntry(session, url);
+        servers.add(entry);
+    }
+
     private void checkQueue(){
         Player[] players = null;
         while ((players = queue.searchMatch()) != null){
-            joinGame(players);
+            if (!joinGame(players)){
+                for (Player i : players){
+                    i.setStatus(PlayerStatus.Queue);
+                }
+                return;
+            }
         }
     }
 
-    private void joinGame(Player[] players){
+    private boolean joinGame(Player[] players){
+        ServerEntry server = null;
+        for (ServerEntry i : servers){
+            if (i.getStatus() == ServerStatus.Free){
+                server = i;
+                break;
+            }
+        }
+        if (server == null){
+            return false;
+        }
 
+        JsonObject json = new JsonObject();
+        json.addProperty("gameserver", true);
+        json.addProperty("url", server.getUrl());
+
+        for (Player i : players){
+            try {
+                i.getSession().getBasicRemote().sendText(json.toString());
+            } catch (IOException e) {
+
+            }
+            queue.removeEntry(i);
+        }
+
+
+        return true;
     }
 
 
@@ -61,7 +97,8 @@ public class LobbyModel implements IsLobby {
 
     @Override
     public void removePlayer(Session session) {
-        players.removeIf(p -> p.getSession().getId().equals(session.getId()));
+        players.removeIf(p -> p.getSession() == session);
+        servers.removeIf(p -> p.getSession() == session);
     }
 
     @Override
@@ -97,8 +134,6 @@ public class LobbyModel implements IsLobby {
         json.addProperty("name", message.getPlayer().getName());
         json.addProperty("text", message.getText());
         try {
-            System.out.println(ConsoleColors.BLUE + "Manager: Sending it to people");
-
             sendChatOther(json, message.getPlayer());
         } catch (IOException e) {
             //ignore

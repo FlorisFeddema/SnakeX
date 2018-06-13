@@ -13,7 +13,6 @@ public class Player {
     private int games;
     private int wins;
     private int rating;
-    private ManagerGame currentManagerGame;
     private PlayerStatus status;
 
     public int getGames() {
@@ -50,14 +49,6 @@ public class Player {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public ManagerGame getCurrentManagerGame() {
-        return currentManagerGame;
-    }
-
-    public void setCurrentManagerGame(ManagerGame currentManagerGame) {
-        this.currentManagerGame = currentManagerGame;
     }
 
     public int getRating() {

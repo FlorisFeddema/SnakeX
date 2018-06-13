@@ -49,12 +49,13 @@ public class ManagerEndPoint  {
         } else if (keyInJson(json, "queue")){
             joinQueue(session);
         } else if (keyInJson(json, "gameserver")){
-            registerServer();
+            registerServer(session, json);
         }
     }
 
-    private void registerServer(){
-
+    private void registerServer(Session session, JsonObject json){
+        String url = json.get("url").getAsString();
+        lobby.connectServer(session, url);
     }
 
     private void joinQueue(Session session) {
