@@ -1,6 +1,6 @@
-package SnakeX.ManagerServer;
+package SnakeX.REST;
 
-import SnakeX.Model.Player;
+import SnakeX.Model.Shared.Player;
 
 public interface IsRestEndpoint {
     int loginPlayer(String username, String password);

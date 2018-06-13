@@ -1,20 +1,28 @@
 package SnakeX.Model;
 
+import SnakeX.Model.Manager.Chat;
+import SnakeX.Model.Manager.Message;
+import SnakeX.Model.Shared.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class ChatTest {
 
     Chat chat;
+
+    @Mock
     Player player;
 
     @Before
     public void setUp() throws Exception {
         chat = new Chat();
-        player = new Player(null);
+        player = mock(Player.class);
     }
 
     @Test
@@ -39,5 +47,6 @@ public class ChatTest {
 
         assertSame(message1, result);
         Assert.assertEquals(message1.getText(), message1.getText());
-    }
+
+        }
 }

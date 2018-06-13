@@ -19,4 +19,6 @@ public interface IsClient {
     void updatePlayerStats() throws IOException, InterruptedException;
 
     void sendMessagePlayer(String message) throws IOException;
+
+    void joinQueue() throws IOException;
 }

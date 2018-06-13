@@ -19,9 +19,9 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
-      <Button fx:id="btnPlay" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="163.0" text="Start game" />
-      <Label fx:id="lblTime" layoutX="188.0" layoutY="14.0" prefHeight="17.0" prefWidth="189.0" text="TIme: 00:00" />
-      <Label fx:id="lblPlayers" layoutX="188.0" layoutY="31.0" prefHeight="17.0" prefWidth="189.0" text="x Players found" />
+      <Button fx:id="btnPlay" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#playGame" prefHeight="101.0" prefWidth="163.0" text="Start game" />
+       <Label fx:id="lblTime" layoutX="188.0" layoutY="14.0" prefHeight="17.0" prefWidth="189.0" text="Time: 00:00" />
+       <Label fx:id="lblQueue" layoutX="188.0" layoutY="35.0" prefHeight="17.0" prefWidth="189.0" text="In queue" textFill="#f50606" visible="false" />
       <Pane layoutY="284.0" prefHeight="422.0" prefWidth="652.0">
          <children>
             <TextField fx:id="tbChat" layoutY="376.0" prefHeight="46.0" prefWidth="591.0" />

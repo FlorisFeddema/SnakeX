@@ -1,6 +1,6 @@
-package SnakeX.ManagerServer;
+package SnakeX.REST;
 
-import SnakeX.Model.Player;
+import SnakeX.Model.Shared.Player;
 import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -16,8 +16,8 @@ import javax.ws.rs.core.Response;
 
 public class RestEndPoint implements IsRestEndpoint {
 
-    private final String REST_API_URL = "http://localhost:9998/api/";
-    //private final String REST_API_URL = "http://217.105.43.173:9998/api/";
+    //private final String REST_API_URL = "http://localhost:9998/api/";
+    private final String REST_API_URL = "http://217.105.43.173:9998/api/";
 
     @Override
     public int loginPlayer(String username, String password) {

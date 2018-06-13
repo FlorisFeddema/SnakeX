@@ -43,6 +43,7 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
     @OnError
     public void onWebSocketError(Throwable cause) {
         System.out.println(ConsoleColors.GREEN + "Client: We got an error");
+        cause.printStackTrace(System.err);
     }
 
 
@@ -57,7 +58,7 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         } else if (keyInJson(json, "stats")){
             stats.offer(json);
         } else if (keyInJson(json, "message")){
-            sendMessageOther(json);
+            receiveMessageOther(json);
         }
     }
 
@@ -101,7 +102,14 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         server.getBasicRemote().sendText(json.toString());
     }
 
-    private void sendMessageOther(JsonObject json){
+    @Override
+    public void joinQueue() throws IOException{
+        JsonObject json = new JsonObject();
+        json.addProperty("queue", true);
+        server.getBasicRemote().sendText(json.toString());
+    }
+
+    private void receiveMessageOther(JsonObject json){
         String name = json.get("name").getAsString();
         String message = json.get("text").getAsString();
         client.showMessageOther(name, message);

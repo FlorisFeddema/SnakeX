@@ -8,7 +8,6 @@ public class ClientGame implements IsClient, IsControllerClient {
 
     private IsClientManagerEndPoint managerEndPoint;
     private IsClientGameEndPoint gameEndPoint;
-    private int id;
     private IsMainController mainController;
     private int wins;
     private int games;
@@ -35,7 +34,6 @@ public class ClientGame implements IsClient, IsControllerClient {
 
     public ClientGame(){
         managerEndPoint = new ClientManagerEndPoint(this);
-        id = Integer.MIN_VALUE;
         wins = Integer.MIN_VALUE;
         games = Integer.MIN_VALUE;
     }
@@ -44,7 +42,6 @@ public class ClientGame implements IsClient, IsControllerClient {
     public int loginPlayer(String name, String password) throws IOException, InterruptedException {
         String hash = Hash.getHash(password);
         int id =  managerEndPoint.loginPlayer(name, hash);
-        this.id = id;
         return id;
     }
 
@@ -62,6 +59,11 @@ public class ClientGame implements IsClient, IsControllerClient {
     @Override
     public void sendMessagePlayer(String message) throws IOException {
         managerEndPoint.sendMessagePlayer(message);
+    }
+
+    @Override
+    public void joinQueue() throws IOException {
+        managerEndPoint.joinQueue();
     }
 
     @Override

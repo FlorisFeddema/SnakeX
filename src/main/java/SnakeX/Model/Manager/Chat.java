@@ -1,9 +1,9 @@
-package SnakeX.Model;
+package SnakeX.Model.Manager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chat implements IsChat{
+public class Chat implements IsChat {
     private List<Message> messages;
 
     public Chat(){

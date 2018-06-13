@@ -11,4 +11,6 @@ public interface IsClientManagerEndPoint {
     void updatePlayer() throws IOException, InterruptedException;
 
     void sendMessagePlayer(String message) throws IOException;
+
+    void joinQueue() throws IOException;
 }

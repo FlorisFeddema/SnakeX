@@ -1,4 +1,5 @@
-package SnakeX.Model;
+package SnakeX.Model.Manager;
+
 
 public interface IsChat {
 

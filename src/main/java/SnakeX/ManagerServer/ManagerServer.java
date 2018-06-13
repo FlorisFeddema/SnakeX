@@ -8,9 +8,8 @@ import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainer
 import javax.websocket.server.ServerContainer;
 
 public class ManagerServer {
+
     public static void main(String[] args) {
-
-
         int port = 9900;
         try {
             port =  Integer.parseInt(args[0]);

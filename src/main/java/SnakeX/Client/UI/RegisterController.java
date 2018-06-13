@@ -44,10 +44,10 @@ public class RegisterController extends Controller{
     }
 
     private boolean checkPassword(String password){
-        return password.length() > 3;
+        return password.length() < 3;
     }
 
     private boolean checkUsername(String username){
-        return username.length() > 3;
+        return username.length() < 3;
     }
 }

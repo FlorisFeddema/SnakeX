@@ -1,4 +1,7 @@
-package SnakeX.Model;
+package SnakeX.Model.Manager;
+
+import SnakeX.Client.Logic.IsClient;
+import SnakeX.Model.Shared.Player;
 
 import javax.websocket.Session;
 
@@ -16,4 +19,6 @@ public interface IsLobby {
     int loginPlayer(String username, String password, Session session);
 
     void receiveMessage(String text, Session session);
+
+    void joinQueue(Session session);
 }

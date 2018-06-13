@@ -14,7 +14,7 @@ public class ClientGameEndPoint {
     public ClientGameEndPoint(IsClient client){
         this.client = client;
 
-        URI uri = URI.create("ws://localhost:9991/snake/manager/");
+        URI uri = URI.create("ws://localhost:9991/snake/game/");
         try {
 
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();

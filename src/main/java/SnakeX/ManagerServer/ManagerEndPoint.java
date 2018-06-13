@@ -1,6 +1,8 @@
 package SnakeX.ManagerServer;
 
-import SnakeX.Model.*;
+import SnakeX.Model.Manager.IsLobby;
+import SnakeX.Model.Manager.LobbyModel;
+import SnakeX.Model.Shared.Player;
 import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -19,7 +21,7 @@ public class ManagerEndPoint  {
 
     @OnOpen
     public void connect(Session session){
-        lobby.addPlayer(new Player(session));
+
     }
 
     @OnClose
@@ -44,7 +46,19 @@ public class ManagerEndPoint  {
             statsPlayer(session);
         } else if (keyInJson(json, "message")){
             receiveMessage(json, session);
+        } else if (keyInJson(json, "queue")){
+            joinQueue(session);
+        } else if (keyInJson(json, "gameserver")){
+            registerServer();
         }
+    }
+
+    private void registerServer(){
+
+    }
+
+    private void joinQueue(Session session) {
+        lobby.joinQueue(session);
     }
 
     private void receiveMessage(JsonObject json, Session session) {
