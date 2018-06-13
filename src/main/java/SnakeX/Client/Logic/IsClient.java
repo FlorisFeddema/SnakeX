@@ -1,6 +1,7 @@
 package SnakeX.Client.Logic;
 
 import SnakeX.Client.UI.IsMainController;
+import SnakeX.Model.enums.MoveDirection;
 
 import java.io.IOException;
 
@@ -21,4 +22,6 @@ public interface IsClient {
     void sendMessagePlayer(String message) throws IOException;
 
     void joinQueue() throws IOException;
+
+    void move(MoveDirection direction);
 }

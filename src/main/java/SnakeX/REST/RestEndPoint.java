@@ -40,8 +40,6 @@ public class RestEndPoint implements IsRestEndpoint {
 
         Response response1 = target.path("snake").path("register").request().post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED), Response.class);
 
-        System.out.println(ConsoleColors.BLUE + "Manager: Snakeregister code: " + response1.getStatus());
-
         return id;
     }
 
@@ -62,8 +60,6 @@ public class RestEndPoint implements IsRestEndpoint {
 
     @Override
     public Player updatePlayer(Player player){
-        System.out.println(ConsoleColors.BLUE + "Manager: Somebody wants their stats");
-
         ClientConfig config = new ClientConfig();
         Client client = ClientBuilder.newClient(config);
         WebTarget target = client.target(REST_API_URL);

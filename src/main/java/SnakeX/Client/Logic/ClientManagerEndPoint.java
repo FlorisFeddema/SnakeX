@@ -3,6 +3,7 @@ package SnakeX.Client.Logic;
 import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.eclipse.jetty.util.Utf8LineParser;
 
 import javax.websocket.*;
 import java.io.IOException;
@@ -49,7 +50,6 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
 
     @OnMessage
     public void onWebSocketText(String message) {
-        System.out.println(ConsoleColors.GREEN + "Client: Got a message");
         JsonObject json = new JsonParser().parse(message).getAsJsonObject();
         if (keyInJson(json, "login")) {
             playerId.offer(json.get("id").getAsInt());
@@ -67,7 +67,7 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
 
     private void joinGame(JsonObject json){
         String url = json.get("url").getAsString();
-        System.out.println(ConsoleColors.GREEN + "Client: " + url);
+        client.joinGame(url);
     }
 
     @Override

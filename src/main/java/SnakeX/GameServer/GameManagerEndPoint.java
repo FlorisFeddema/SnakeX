@@ -36,7 +36,7 @@ public class GameManagerEndPoint implements IsGameManagerEndPoint {
         try {
             server.getBasicRemote().sendText(json.toString());
         } catch (IOException e) {
-            //ingore
+            //ignore
         }
     }
 

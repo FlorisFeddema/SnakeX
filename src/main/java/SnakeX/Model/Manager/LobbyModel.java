@@ -4,7 +4,6 @@ import SnakeX.Model.enums.PlayerStatus;
 import SnakeX.Model.enums.ServerStatus;
 import SnakeX.REST.IsRestEndpoint;
 import SnakeX.REST.RestEndPoint;
-import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
 
 import javax.websocket.Session;
@@ -75,6 +74,7 @@ public class LobbyModel implements IsLobby {
             }
             queue.removeEntry(i);
         }
+        server.setStatus(ServerStatus.Busy);
 
 
         return true;
@@ -144,7 +144,6 @@ public class LobbyModel implements IsLobby {
     public void joinQueue(Session session) {
         Player player = getPlayer(session);
         queue.addEntry(player);
-        System.out.println(ConsoleColors.BLUE + "Manager: You joined queue bby");
     }
 
     private void sendChatOther(JsonObject message, Player player) throws IOException {

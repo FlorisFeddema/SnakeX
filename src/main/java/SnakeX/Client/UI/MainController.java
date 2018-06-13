@@ -53,8 +53,6 @@ public class MainController extends Controller implements IsMainController {
         int wins = client.getWins();
         int losses = games - wins;
 
-        System.out.println(ConsoleColors.GREEN + games);
-        System.out.println(ConsoleColors.GREEN + wins);
         XYChart.Series winbar = new XYChart.Series();
         winbar.setName("Win");
 
@@ -97,6 +95,17 @@ public class MainController extends Controller implements IsMainController {
             addMessage(label);
         });
 
+    }
+
+    @Override
+    public void joinGame() {
+        Platform.runLater(() -> {
+            try {
+                changeScene("Game", client);
+            } catch (IOException e) {
+                //ignore
+            }
+        });
     }
 
     private void addMessage(Label label){

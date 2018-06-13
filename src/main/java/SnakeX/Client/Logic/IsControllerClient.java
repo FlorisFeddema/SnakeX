@@ -6,4 +6,6 @@ public interface IsControllerClient {
     void setGames(int games);
 
     void showMessageOther(String message, String name);
+
+    void joinGame(String url);
 }

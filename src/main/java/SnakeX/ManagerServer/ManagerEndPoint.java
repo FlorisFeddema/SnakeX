@@ -36,7 +36,6 @@ public class ManagerEndPoint  {
 
     @OnMessage
     public void onMessageReceived(String message, Session session) {
-        System.out.println(ConsoleColors.BLUE + "Manager: Got a message");
         JsonObject json = new JsonParser().parse(message).getAsJsonObject();
         if (keyInJson(json, "login")) {
             loginPlayer(json, session);

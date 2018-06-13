@@ -1,6 +1,7 @@
 package SnakeX.Client.Logic;
 
 import SnakeX.Client.UI.IsMainController;
+import SnakeX.Model.enums.MoveDirection;
 
 import java.io.IOException;
 
@@ -11,6 +12,8 @@ public class ClientGame implements IsClient, IsControllerClient {
     private IsMainController mainController;
     private int wins;
     private int games;
+    private String gameUrl;
+    private int id;
 
     public int getWins() {
         return wins;
@@ -36,12 +39,14 @@ public class ClientGame implements IsClient, IsControllerClient {
         managerEndPoint = new ClientManagerEndPoint(this);
         wins = Integer.MIN_VALUE;
         games = Integer.MIN_VALUE;
+        id = Integer.MIN_VALUE;
     }
 
     @Override
     public int loginPlayer(String name, String password) throws IOException, InterruptedException {
         String hash = Hash.getHash(password);
         int id =  managerEndPoint.loginPlayer(name, hash);
+        this.id = id;
         return id;
     }
 
@@ -67,7 +72,19 @@ public class ClientGame implements IsClient, IsControllerClient {
     }
 
     @Override
+    public void move(MoveDirection direction) {
+        //TODO
+    }
+
+    @Override
     public void showMessageOther(String name, String message){
         mainController.addMessageOther(name, message);
+    }
+
+    @Override
+    public void joinGame(String url) {
+        gameUrl = url;
+        gameEndPoint = new ClientGameEndPoint(this, url);
+        mainController.joinGame();
     }
 }
