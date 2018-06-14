@@ -1,7 +1,6 @@
 package SnakeX.Model.Manager;
 
 import SnakeX.Model.enums.ServerStatus;
-import org.eclipse.jetty.server.Server;
 
 import javax.websocket.Session;
 

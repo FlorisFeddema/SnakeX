@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Queue {
-    final int threshold = 400;
+    private final int threshold = 400;
     private List<QueueEntry> entries;
 
     public Queue() {

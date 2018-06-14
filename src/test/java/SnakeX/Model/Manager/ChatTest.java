@@ -1,4 +1,4 @@
-package SnakeX.Model;
+package SnakeX.Model.Manager;
 
 import SnakeX.Model.Manager.Chat;
 import SnakeX.Model.Manager.Message;
