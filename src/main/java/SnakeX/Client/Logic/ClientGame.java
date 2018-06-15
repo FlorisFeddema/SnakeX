@@ -11,16 +11,26 @@ public class ClientGame implements IsClient, IsControllerClient {
     private IsClientManagerEndPoint managerEndPoint;
     private IsClientGameEndPoint gameEndPoint;
     private IsMainController mainController;
-
-    public void setGameController(IsGameController gameController) {
-        this.gameController = gameController;
-    }
-
     private IsGameController gameController;
     private int wins;
     private int games;
     private String gameUrl;
     private int id;
+    private Snake player;
+    private Snake enemy;
+
+
+    public Snake getPlayer() {
+        return player;
+    }
+
+    public Snake getEnemy() {
+        return enemy;
+    }
+
+    public void setGameController(IsGameController gameController) {
+        this.gameController = gameController;
+    }
 
     public int getWins() {
         return wins;
@@ -89,7 +99,7 @@ public class ClientGame implements IsClient, IsControllerClient {
     }
 
     @Override
-    public void joinGame(String url) {
+    public void joinGame(String url, String enemyName, int enemyRating, int playerRating) {
         gameUrl = url;
         gameEndPoint = new ClientGameEndPoint(this, url);
         mainController.joinGame();

@@ -1,6 +1,8 @@
 package SnakeX.Client.UI;
 
 import SnakeX.Client.Logic.IsClient;
+import SnakeX.Client.Logic.Point;
+import SnakeX.Client.Logic.Snake;
 import SnakeX.Model.enums.MoveDirection;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -15,9 +17,11 @@ public class GameController extends Controller implements IsGameController{
     private int size = 600;
     private int squareSize = size / horizontal;
 
+
     public Pane PnGame;
 
     private Rectangle[][] grid;
+
 
     public void setupGrid(){
         grid = new Rectangle[horizontal][vertical];
@@ -37,8 +41,10 @@ public class GameController extends Controller implements IsGameController{
         }
     }
 
+    @Override
     public void setClient(IsClient client){
         super.setClient(client);
+        client.setGameController(this);
         Client.stage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if(key.getCode()==KeyCode.DOWN) {
                 client.move(MoveDirection.Down);
@@ -59,5 +65,25 @@ public class GameController extends Controller implements IsGameController{
                 client.move(MoveDirection.Right);
             }
         });
+    }
+
+    public void spawn(Snake snake){
+        int x = snake.getPositions().get(0).getX();
+        int y = snake.getPositions().get(0).getY();
+        grid[x][y].setFill(client.getPlayer().getColor());
+    }
+
+    public void move(Snake[] snakes){
+        for (Rectangle[] i: grid) {
+            for (Rectangle j: i) {
+                j.setFill(Color.WHITE);
+            }
+        }
+
+        for (Snake snake:snakes) {
+            for (Point i:snake.getPositions()) {
+                grid[i.getX()][i.getY()].setFill(snake.getColor());
+            }
+        }
     }
 }
