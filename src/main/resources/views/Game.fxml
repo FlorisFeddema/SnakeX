@@ -15,13 +15,13 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="LblEnemyName1" alignment="CENTER" layoutX="21.0" layoutY="10.0" prefHeight="17.0" prefWidth="229.0" text="EnemyElo" />
-            <Label fx:id="LblYourName" alignment="CENTER" prefHeight="17.0" prefWidth="229.0" text="YourName">
+            <Label fx:id="LblEnemyElo" alignment="CENTER" layoutX="21.0" layoutY="10.0" prefHeight="17.0" prefWidth="229.0" text="EnemyElo" />
+            <Label fx:id="LblYourName" alignment="CENTER" prefHeight="17.0" prefWidth="229.0" text="You">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="LblYourName1" alignment="CENTER" layoutX="21.0" layoutY="47.0" prefHeight="17.0" prefWidth="229.0" text="YourElo" />
+            <Label fx:id="LblYourElo" alignment="CENTER" layoutX="21.0" layoutY="47.0" prefHeight="17.0" prefWidth="229.0" text="YourElo" />
          </children>
       </VBox>
    </children>

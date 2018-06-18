@@ -2,8 +2,9 @@ package SnakeX.Client.UI;
 
 import SnakeX.Client.Logic.IsClient;
 import SnakeX.Client.Logic.Point;
-import SnakeX.Client.Logic.Snake;
+import SnakeX.Model.Manager.Snake;
 import SnakeX.Model.enums.MoveDirection;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -12,16 +13,17 @@ import javafx.scene.shape.Rectangle;
 
 public class GameController extends Controller implements IsGameController{
 
+    public Label LblEnemyName;
+    public Label LblEnemyElo;
+    public Label LblYourElo;
     private int horizontal = 20;
     private int vertical = 20;
     private int size = 600;
     private int squareSize = size / horizontal;
 
-
     public Pane PnGame;
 
     private Rectangle[][] grid;
-
 
     public void setupGrid(){
         grid = new Rectangle[horizontal][vertical];
@@ -45,6 +47,8 @@ public class GameController extends Controller implements IsGameController{
     public void setClient(IsClient client){
         super.setClient(client);
         client.setGameController(this);
+        setupGrid();
+        setupMatchDetails();
         Client.stage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if(key.getCode()==KeyCode.DOWN) {
                 client.move(MoveDirection.Down);
@@ -66,6 +70,13 @@ public class GameController extends Controller implements IsGameController{
             }
         });
     }
+
+    private void setupMatchDetails(){
+        LblEnemyElo.setText(Integer.toString(client.getEnemy().getRating()));
+        LblYourElo.setText(Integer.toString(client.getPlayer().getRating()));
+        LblEnemyName.setText(client.getEnemy().getName());
+    }
+
 
     public void spawn(Snake snake){
         int x = snake.getPositions().get(0).getX();

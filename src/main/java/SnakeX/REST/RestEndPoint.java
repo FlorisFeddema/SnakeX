@@ -1,7 +1,6 @@
 package SnakeX.REST;
 
 import SnakeX.Model.Manager.Player;
-import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.glassfish.jersey.client.ClientConfig;
@@ -71,7 +70,13 @@ public class RestEndPoint implements IsRestEndpoint {
         player.setGames(result.get("games").getAsInt());
         player.setWins(result.get("wins").getAsInt());
 
+        response = target.path("snake").path("rating").path(Integer.toString(player.getId())).request().get(String.class);
+
+        result =  new JsonParser().parse(response).getAsJsonObject();
+        player.setRating(result.get("rating").getAsInt());
+
         return player;
 
     }
+
 }

@@ -2,7 +2,9 @@ package SnakeX.Client.Logic;
 
 import SnakeX.Client.UI.IsGameController;
 import SnakeX.Client.UI.IsMainController;
+import SnakeX.Model.Manager.Snake;
 import SnakeX.Model.enums.MoveDirection;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
@@ -99,8 +101,10 @@ public class ClientGame implements IsClient, IsControllerClient {
     }
 
     @Override
-    public void joinGame(String url, String enemyName, int enemyRating, int playerRating) {
+    public void joinGame(String url, String enemy, int enemyRating, int rating, int xPlayer, int yPlayer, int xEnemy, int yEnemy) {
         gameUrl = url;
+        player = new Snake(Color.BLACK, 5, new Point(xPlayer, yPlayer), "You", rating);
+        this.enemy = new Snake(Color.RED, 5, new Point(xEnemy, yEnemy), enemy, enemyRating);
         gameEndPoint = new ClientGameEndPoint(this, url);
         mainController.joinGame();
     }

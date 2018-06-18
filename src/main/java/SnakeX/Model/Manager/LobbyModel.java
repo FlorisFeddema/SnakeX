@@ -1,5 +1,6 @@
 package SnakeX.Model.Manager;
 
+import SnakeX.Client.Logic.Point;
 import SnakeX.Model.enums.PlayerStatus;
 import SnakeX.Model.enums.ServerStatus;
 import SnakeX.REST.IsRestEndpoint;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class LobbyModel implements IsLobby {
+    private static final int GRIDSIZE = 20;
     private IsChat chat;
     private Set<Player> players;
     private IsRestEndpoint rest;
@@ -62,17 +64,34 @@ public class LobbyModel implements IsLobby {
             return false;
         }
 
-        JsonObject json = new JsonObject();
-        json.addProperty("gameserver", true);
-        json.addProperty("url", server.getUrl());
+        Random random = new Random();
+        for (int i = 0; i < players.length; i++) {
+            Player player = players[i];
+            int x = 1 + random.nextInt(GRIDSIZE/2 - 2) + 5*i;
+            int y = 1 + random.nextInt(GRIDSIZE/2 - 2) + 5*i;
+            Point point = new Point(x, y);
+            Snake snake = new Snake(5, point);
+            player.setSnake(snake);
+        }
 
-        for (Player i : players){
+
+        for (int i = 0; i < players.length; i++) {
             try {
-                i.getSession().getBasicRemote().sendText(json.toString());
+                JsonObject json = new JsonObject();
+                json.addProperty("gameserver", true);
+                json.addProperty("url", server.getUrl());
+                json.addProperty("enemy", players[1-i].getName());
+                json.addProperty("enemyRating", players[1-i].getRating());
+                json.addProperty("rating", players[i].getRating());
+                json.addProperty("xPlayer", players[i].getSnake().getLastPosition().getX());
+                json.addProperty("yPlayer", players[i].getSnake().getLastPosition().getY());
+                json.addProperty("xEnemy", players[1-i].getSnake().getLastPosition().getX());
+                json.addProperty("yEnemy", players[1-i].getSnake().getLastPosition().getY());
+                players[i].getSession().getBasicRemote().sendText(json.toString());
             } catch (IOException e) {
-
+                //ignore
             }
-            queue.removeEntry(i);
+            queue.removeEntry(players[i]);
         }
         server.setStatus(ServerStatus.Busy);
 

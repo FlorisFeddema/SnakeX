@@ -7,5 +7,5 @@ public interface IsControllerClient {
 
     void showMessageOther(String message, String name);
 
-    void joinGame(String url, String enemyName, int enemyRating, int playerRating);
+    void joinGame(String url, String enemy, int enemyRating, int rating, int xPlayer, int yPlayer, int xEnemy, int yEnemy);
 }

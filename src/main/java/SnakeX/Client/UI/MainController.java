@@ -1,9 +1,7 @@
 package SnakeX.Client.UI;
 
 import SnakeX.Client.Logic.IsClient;
-import SnakeX.Shared.ConsoleColors;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
@@ -16,7 +14,6 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
 
 import static javafx.application.Platform.runLater;
 
@@ -117,34 +114,34 @@ public class MainController extends Controller implements IsMainController {
     public void playGame() {
 
 
-        Platform.runLater(() -> {
-            try {
-                changeScene("Game", client);
-            } catch (IOException e) {
-                //ignore
-            }
-        });
+//        Platform.runLater(() -> {
+//            try {
+//                changeScene("Game", client);
+//            } catch (IOException e) {
+//                //ignore
+//            }
+//        });
 
-//        btnPlay.setDisable(true);
-//
-//        try {
-//            client.joinQueue();
-//            lblQueue.setVisible(true);
-//            timer = new Timer();
-//            timer.scheduleAtFixedRate(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    queueTime += 1;
-//                    int queueMinute = queueTime / 60;
-//                    int queueSecond = queueTime % 60;
-//                    String text = "Time: " + String.format("%1$02d", queueMinute) + ":" + String.format("%1$02d", queueSecond);
-//                    Platform.runLater(() -> lblTime.setText(text));
-//                }
-//            }, 1000, 1000);
-//        } catch (IOException e) {
-//            btnPlay.setDisable(false);
-//
-//        }
+        btnPlay.setDisable(true);
+
+        try {
+            client.joinQueue();
+            lblQueue.setVisible(true);
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    queueTime += 1;
+                    int queueMinute = queueTime / 60;
+                    int queueSecond = queueTime % 60;
+                    String text = "Time: " + String.format("%1$02d", queueMinute) + ":" + String.format("%1$02d", queueSecond);
+                    Platform.runLater(() -> lblTime.setText(text));
+                }
+            }, 1000, 1000);
+        } catch (IOException e) {
+            btnPlay.setDisable(false);
+
+        }
 
     }
 }

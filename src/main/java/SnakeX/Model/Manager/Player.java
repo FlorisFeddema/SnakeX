@@ -14,6 +14,15 @@ public class Player {
     private int wins;
     private int rating;
     private PlayerStatus status;
+    private Snake snake;
+
+    public Snake getSnake() {
+        return snake;
+    }
+
+    public void setSnake(Snake snake) {
+        this.snake = snake;
+    }
 
     public int getGames() {
         return games;
@@ -75,6 +84,7 @@ public class Player {
         this.rating = 1500;
         this.status = PlayerStatus.Lobby;
     }
+    
 }
 
 

@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.booleanThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

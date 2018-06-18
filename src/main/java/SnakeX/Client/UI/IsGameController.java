@@ -1,6 +1,7 @@
 package SnakeX.Client.UI;
 
-import SnakeX.Client.Logic.Snake;
+
+import SnakeX.Model.Manager.Snake;
 
 public interface IsGameController {
 

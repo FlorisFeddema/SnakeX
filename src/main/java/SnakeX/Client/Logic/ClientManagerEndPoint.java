@@ -67,7 +67,14 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
 
     private void joinGame(JsonObject json){
         String url = json.get("url").getAsString();
-        client.joinGame(url);
+        String enemy = json.get("enemy").getAsString();
+        int enemyRating = json.get("enemyRating").getAsInt();
+        int rating = json.get("rating").getAsInt();
+        int xPlayer = json.get("xPlayer").getAsInt();
+        int yPlayer = json.get("yPlayer").getAsInt();
+        int xEnemy = json.get("xEnemy").getAsInt();
+        int yEnemy = json.get("yEnemy").getAsInt();
+        client.joinGame(url, enemy, enemyRating, rating, xPlayer, yPlayer, xEnemy, yEnemy);
     }
 
     @Override
