@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SnakeX.Client.UI.RegisterController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snakex.client.ui.RegisterController">
    <children>
       <TextField fx:id="tbUsername" layoutX="66.0" layoutY="62.0" promptText="Username" />
       <PasswordField fx:id="tbPassword" accessibleRole="PASSWORD_FIELD" layoutX="66.0" layoutY="111.0" promptText="Password" />

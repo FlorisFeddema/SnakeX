@@ -5,23 +5,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SnakeX.Client.UI.GameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="1084.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snakex.client.ui.GameController">
    <children>
-      <Pane fx:id="PnGame" layoutX="258.0" prefHeight="707.0" prefWidth="828.0" />
+      <Pane fx:id="pnGame" layoutX="258.0" prefHeight="707.0" prefWidth="828.0" />
       <VBox fx:id="PnStats" alignment="TOP_CENTER" prefHeight="707.0" prefWidth="251.0" spacing="20.0">
          <children>
-            <Label fx:id="LblEnemyName" alignment="CENTER" prefHeight="17.0" prefWidth="229.0" text="EnemyName">
+            <Label fx:id="lblEnemyName" alignment="CENTER" prefHeight="17.0" prefWidth="229.0" text="EnemyName">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="LblEnemyElo" alignment="CENTER" layoutX="21.0" layoutY="10.0" prefHeight="17.0" prefWidth="229.0" text="EnemyElo" />
+            <Label fx:id="lblEnemyElo" alignment="CENTER" layoutX="21.0" layoutY="10.0" prefHeight="17.0" prefWidth="229.0" text="EnemyElo" />
             <Label fx:id="LblYourName" alignment="CENTER" prefHeight="17.0" prefWidth="229.0" text="You">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="LblYourElo" alignment="CENTER" layoutX="21.0" layoutY="47.0" prefHeight="17.0" prefWidth="229.0" text="YourElo" />
+            <Label fx:id="lblYourElo" alignment="CENTER" layoutX="21.0" layoutY="47.0" prefHeight="17.0" prefWidth="229.0" text="YourElo" />
          </children>
       </VBox>
    </children>

@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1076.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SnakeX.Client.UI.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1076.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snakex.client.ui.MainController">
    <children>
-      <BarChart fx:id="WinChart" layoutX="671.0" layoutY="14.0" prefHeight="672.0" prefWidth="399.0">
+      <BarChart fx:id="winChart" layoutX="671.0" layoutY="14.0" prefHeight="672.0" prefWidth="399.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
