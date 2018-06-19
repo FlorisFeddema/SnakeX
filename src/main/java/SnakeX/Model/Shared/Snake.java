@@ -107,6 +107,10 @@ public class Snake {
 
     }
 
+    public void grow(){
+        maxLength++;
+    }
+
     public Point move(MoveDirection direction){
         int x = 0;
         int y = 0;

@@ -4,6 +4,7 @@ import SnakeX.Client.Logic.IsClient;
 import SnakeX.Model.Shared.Point;
 import SnakeX.Model.Shared.Snake;
 import SnakeX.Model.enums.MoveDirection;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,8 +30,8 @@ public class GameController extends Controller implements IsGameController{
         grid = new Rectangle[horizontal][vertical];
         for (int i = 0; i < horizontal; i++) {
             for (int j = 0; j < vertical; j++) {
-                double x = 100 + i * (size / horizontal) + 1;
-                double y = 50 + j * (size/ vertical) + 1;
+                double x = 100 + i * ((double)size / horizontal) + 1;
+                double y = 50 + j * ((double)size/ vertical) +  1;
                 Rectangle rectangle = new Rectangle(x,y, squareSize, squareSize);
                 rectangle.setArcWidth(5);
                 rectangle.setArcHeight(5);
@@ -82,16 +83,36 @@ public class GameController extends Controller implements IsGameController{
 
 
     public void move(Snake[] snakes){
-        for (Rectangle[] i: grid) {
-            for (Rectangle j: i) {
-                j.setFill(Color.WHITE);
+        Platform.runLater(() -> {
+            for (Rectangle[] i: grid) {
+                for (Rectangle j: i) {
+                    j.setFill(Color.WHITE);
+                }
             }
-        }
 
-        for (Snake snake:snakes) {
-            for (Point i:snake.getPositions()) {
-                grid[i.getX()][i.getY()].setFill(snake.getColor());
+            for (Snake snake:snakes) {
+                for (Point i:snake.getPositions()) {
+                    grid[i.getX()][i.getY()].setFill(snake.getColor());
+                }
             }
-        }
+        });
+    }
+
+    public void showWin(){
+        Platform.runLater(() -> {
+            showAlert("You won!", "Winner");
+        });
+    }
+
+    public void showLoss(){
+        Platform.runLater(() -> {
+            showAlert("You lost!", "Loser");
+        });
+    }
+
+    public void showDraw(){
+        Platform.runLater(() -> {
+            showAlert("It is a draw", "Draw");
+        });
     }
 }

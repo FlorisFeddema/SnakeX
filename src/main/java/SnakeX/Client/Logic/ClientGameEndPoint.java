@@ -1,6 +1,7 @@
 package SnakeX.Client.Logic;
 
 
+import SnakeX.Model.enums.GameResult;
 import SnakeX.Model.enums.MoveDirection;
 import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
@@ -62,9 +63,8 @@ public class ClientGameEndPoint implements IsClientGameEndPoint {
      private void move(JsonObject json){
         MoveDirection playerDirection = MoveDirection.valueOf(json.get("player").getAsString());
         MoveDirection enemyDirection = MoveDirection.valueOf(json.get("enemy").getAsString());
-        boolean playerAlive = json.get("alivePlayer").getAsBoolean();
-        boolean enemyAlive = json.get("aliveEnemy").getAsBoolean();
-        client.move(playerDirection, enemyDirection, playerAlive, enemyAlive);
+        GameResult result = GameResult.valueOf(json.get("result").getAsString());
+        client.move(playerDirection, enemyDirection, result);
      }
 
 }

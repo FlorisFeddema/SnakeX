@@ -19,8 +19,8 @@ public class Point {
     }
 
     public boolean isOnGrid(){
-        boolean rx = x < 20 && x > 0;
-        boolean ry = y < 20 && y > 0;
+        boolean rx = x < 20 && x >= 0;
+        boolean ry = y < 20 && y >= 0;
         return rx && ry;
     }
 }

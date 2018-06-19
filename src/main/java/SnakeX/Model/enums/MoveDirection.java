@@ -1,7 +1,5 @@
 package SnakeX.Model.enums;
 
-import javax.xml.ws.Holder;
-
 public enum MoveDirection {
     Up(false),
     Down(false),

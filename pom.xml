@@ -6,7 +6,7 @@
 
     <groupId>SnakeX</groupId>
     <artifactId>SnakeX</artifactId>
-    <version>1</version>
+    <version>1.0.1</version>
     <build>
         <plugins>
             <plugin>

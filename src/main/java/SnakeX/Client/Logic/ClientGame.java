@@ -4,9 +4,11 @@ import SnakeX.Client.UI.IsGameController;
 import SnakeX.Client.UI.IsMainController;
 import SnakeX.Model.Shared.Point;
 import SnakeX.Model.Shared.Snake;
+import SnakeX.Model.enums.GameResult;
 import SnakeX.Model.enums.MoveDirection;
 import javafx.scene.paint.Color;
 
+import javax.lang.model.util.ElementScanner6;
 import java.io.IOException;
 
 public class ClientGame implements IsClient, IsControllerClient {
@@ -119,13 +121,20 @@ public class ClientGame implements IsClient, IsControllerClient {
     }
 
     @Override
-    public void move(MoveDirection playerDirection, MoveDirection enemyDirection, boolean playerAlive, boolean enemyAlive) {
-        if (!playerAlive || !enemyAlive){
+    public void move(MoveDirection playerDirection, MoveDirection enemyDirection, GameResult result) {
+        System.out.println(result);
+        if (result == GameResult.None){
             player.move(playerDirection);
             enemy.move(enemyDirection);
             gameController.move(new Snake[] {player, enemy});
         } else {
-            System.out.println("Somebody won");
+            if (result == GameResult.Won){
+                gameController.showWin();
+            } else if (result == GameResult.Loss){
+                gameController.showLoss();
+            } else {
+                gameController.showDraw();
+            }
         }
     }
 }
