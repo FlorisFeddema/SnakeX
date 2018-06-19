@@ -2,6 +2,7 @@ package snakex.client.logic;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import snakex.model.shared.Point;
 
 import javax.websocket.*;
 import java.io.IOException;
@@ -73,7 +74,7 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         int xEnemy = json.get("xEnemy").getAsInt();
         int yEnemy = json.get("yEnemy").getAsInt();
         int length = json.get("length").getAsInt();
-        client.joinGame(url, enemy, enemyRating, rating, xPlayer, yPlayer, xEnemy, yEnemy, length);
+        client.joinGame(url, enemy, enemyRating, rating, new Point(xPlayer, yPlayer), new Point(xEnemy, yEnemy), length);
     }
 
     @Override

@@ -30,4 +30,5 @@ public interface IsGameController {
      * shows a alert when the game was a draw, also takes the player back to main menu
      */
     void showDraw();
+
 }

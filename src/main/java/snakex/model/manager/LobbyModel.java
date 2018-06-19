@@ -55,6 +55,22 @@ public class LobbyModel implements IsLobby {
         servers.add(entry);
     }
 
+    @Override
+    public void endGame(int id1, int id2, Session session) {
+        for (Player player : players){
+            if (player.getId() == id1 || player.getId() == id2){
+                player.setStatus(PlayerStatus.LOBBY);
+            }
+        }
+
+        for (ServerEntry server : servers){
+            if (server.getSession().getId().equals(session.getId())){
+                server.setStatus(ServerStatus.FREE);
+                break;
+            }
+        }
+    }
+
     public void checkQueue(){
         Player[] playersGame;
         while ((playersGame = queue.searchMatch())[0] != null){

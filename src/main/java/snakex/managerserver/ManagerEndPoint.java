@@ -49,7 +49,15 @@ public class ManagerEndPoint  {
             joinQueue(session);
         } else if (keyInJson(json, "gameserver")){
             registerServer(session, json);
+        } else if (keyInJson(json, "end")){
+            endGame(session, json);
         }
+    }
+
+    private void endGame(Session session, JsonObject json) {
+        int id1 = json.get("id1").getAsInt();
+        int id2 = json.get("id2").getAsInt();
+        lobby.endGame(id1, id2, session);
     }
 
     private void registerServer(Session session, JsonObject json){

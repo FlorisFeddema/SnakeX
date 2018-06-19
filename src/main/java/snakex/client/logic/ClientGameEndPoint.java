@@ -45,7 +45,22 @@ public class ClientGameEndPoint implements IsClientGameEndPoint {
         JsonObject json = new JsonParser().parse(message).getAsJsonObject();
         if (keyInJson(json, "move")){
             move(json);
+        } else if (keyInJson(json, "powerUp")){
+            spawnPowerUp(json);
+        } else if (keyInJson(json, "pickup")){
+            pickup(json);
         }
+    }
+
+    private void pickup(JsonObject json){
+        boolean isPlayer = json.get("pickup").getAsBoolean();
+        client.growSnake(isPlayer);
+    }
+
+    private void spawnPowerUp(JsonObject json){
+        int x = json.get("x").getAsInt();
+        int y = json.get("y").getAsInt();
+        client.drawPowerUp(x, y);
     }
 
     @Override

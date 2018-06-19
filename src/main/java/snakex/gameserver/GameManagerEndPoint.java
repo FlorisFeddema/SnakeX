@@ -29,6 +29,18 @@ public class GameManagerEndPoint implements IsGameManagerEndPoint {
         }
     }
 
+    public void endGame(int id1, int id2){
+        JsonObject json = new JsonObject();
+        json.addProperty("end", true);
+        json.addProperty("id1", id1);
+        json.addProperty("id2", id2);
+        try {
+            server.getBasicRemote().sendText(json.toString());
+        } catch (IOException e) {
+            //ignore
+        }
+    }
+
 
     private void connectServer(String url){
         JsonObject json = new JsonObject();

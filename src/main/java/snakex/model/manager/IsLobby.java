@@ -66,4 +66,12 @@ public interface IsLobby {
      * @param url url of the server, for the player to connect
      */
     void connectServer(Session session, String url);
+
+    /***
+     * ends the game with players on the server
+     * @param id1 id of player 1
+     * @param id2 id of player 2
+     * @param session session of the server
+     */
+    void endGame(int id1, int id2, Session session);
 }

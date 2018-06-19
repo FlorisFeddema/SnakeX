@@ -97,7 +97,12 @@ public class GameController extends Controller implements IsGameController{
                     grid[i.getX()][i.getY()].setFill(snake.getColor());
                 }
             }
+
+            grid[client.getPowerUp().getX()][client.getPowerUp().getY()].setFill(Color.GREEN);
+
         });
+
+
     }
 
     public void showWin(){
@@ -128,4 +133,5 @@ public class GameController extends Controller implements IsGameController{
             //ignore
         }
     }
+
 }

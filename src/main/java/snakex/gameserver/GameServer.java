@@ -6,6 +6,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
+import snakex.rest.GameRestEndPoint;
 
 import javax.websocket.server.ServerContainer;
 
@@ -25,7 +26,7 @@ public class GameServer {
             //ignore
         }
         String url = "ws://localhost:" + port + "/snake/game/";
-        gameModel = new GameModel(url);
+        gameModel = new GameModel(url, new GameRestEndPoint());
 
 
         Server server = new Server();

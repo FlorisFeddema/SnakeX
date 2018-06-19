@@ -2,6 +2,7 @@ package snakex.client.logic;
 
 import snakex.client.ui.IsGameController;
 import snakex.client.ui.IsMainController;
+import snakex.model.shared.Point;
 import snakex.model.shared.Snake;
 import snakex.model.enums.MoveDirection;
 
@@ -95,4 +96,10 @@ public interface IsClient {
      * connects to a game with connection
      */
     void connectGame();
+
+    /***
+     * gets the point of the powerup
+     * @return powerup
+     */
+    Point getPowerUp();
 }

@@ -2,6 +2,7 @@ package snakex.client.logic;
 
 import snakex.model.enums.GameResult;
 import snakex.model.enums.MoveDirection;
+import snakex.model.shared.Point;
 
 public interface IsControllerClient {
     /***
@@ -26,16 +27,14 @@ public interface IsControllerClient {
     /***
      * joins a game
      * @param url url of the gameserver
-     * @param enemy name of the enemy
+     * @param enemyName name of the enemy
      * @param enemyRating rating of the enemy
      * @param rating your rating
-     * @param xPlayer x spawn player
-     * @param yPlayer y spawn player
-     * @param xEnemy x spawn enemy
-     * @param yEnemy y spawn enemy
+     * @param player position of player
+     * @param enemy position of enemy
      * @param length length of the snake
      */
-    void joinGame(String url, String enemy, int enemyRating, int rating, int xPlayer, int yPlayer, int xEnemy, int yEnemy, int length);
+    void joinGame(String url, String enemyName, int enemyRating, int rating, Point player, Point enemy, int length);
 
     /***
      * moves the snakes in the direction on the server, gives also the result of the moves
@@ -44,4 +43,17 @@ public interface IsControllerClient {
      * @param result result of the moves, for the player
      */
     void move(MoveDirection playerDirection, MoveDirection enemyDirection, GameResult result);
+
+    /***
+     * sets the powerup at a point
+     * @param x x coordinate
+     * @param y y coordinate
+     */
+    void drawPowerUp(int x, int y);
+
+    /***
+     * grows a snake
+     * @param isPlayer is player or enemy
+     */
+    void growSnake(boolean isPlayer);
 }

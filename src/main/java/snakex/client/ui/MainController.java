@@ -53,7 +53,7 @@ public class MainController extends Controller implements IsMainController {
         winChart.getData().add(winbar);
 
         XYChart.Series lossbar = new XYChart.Series();
-        lossbar.setName("LOSS");
+        lossbar.setName("Loss");
 
         lossbar.getData().add(new XYChart.Data("Games", losses));
 

@@ -22,6 +22,12 @@ public class ClientGame implements IsClient, IsControllerClient {
     private int id;
     private Snake player;
     private Snake enemy;
+    private Point powerUp;
+
+    @Override
+    public Point getPowerUp() {
+        return powerUp;
+    }
 
 
     public Snake getPlayer() {
@@ -112,10 +118,10 @@ public class ClientGame implements IsClient, IsControllerClient {
     }
 
     @Override
-    public void joinGame(String url, String enemy, int enemyRating, int rating, int xPlayer, int yPlayer, int xEnemy, int yEnemy, int length) {
+    public void joinGame(String url, String enemyName, int enemyRating, int rating, Point player, Point enemy, int length) {
         gameUrl = url;
-        player = new Snake(Color.BLACK, length, new Point(xPlayer, yPlayer), "You", rating);
-        this.enemy = new Snake(Color.RED, length, new Point(xEnemy, yEnemy), enemy, enemyRating);
+        this.player = new Snake(Color.BLACK, length, player, "You", rating);
+        this.enemy = new Snake(Color.RED, length, enemy, enemyName, enemyRating);
         mainController.joinGame();
     }
 
@@ -135,6 +141,20 @@ public class ClientGame implements IsClient, IsControllerClient {
             } else {
                 gameController.showDraw();
             }
+        }
+    }
+
+    @Override
+    public void drawPowerUp(int x, int y){
+        powerUp = new Point(x, y);
+    }
+
+    @Override
+    public void growSnake(boolean isPlayer) {
+        if (isPlayer){
+            player.grow();
+        } else {
+            enemy.grow();
         }
     }
 }
