@@ -57,8 +57,8 @@ public class SnakeTest {
     public void move() {
         snake1.move(MoveDirection.Up);
 
-        assertEquals(3, snake1.getLastPosition().getX());
-        assertEquals(5, snake1.getLastPosition().getY());
+        assertEquals(2, snake1.getLastPosition().getX());
+        assertEquals(4, snake1.getLastPosition().getY());
 
         snake1.move(MoveDirection.Down);
 
@@ -67,8 +67,8 @@ public class SnakeTest {
 
         snake1.move(MoveDirection.Left);
 
-        assertEquals(2, snake1.getLastPosition().getX());
-        assertEquals(4, snake1.getLastPosition().getY());
+        assertEquals(1, snake1.getLastPosition().getX());
+        assertEquals(5, snake1.getLastPosition().getY());
 
         snake1.move(MoveDirection.Right);
 
