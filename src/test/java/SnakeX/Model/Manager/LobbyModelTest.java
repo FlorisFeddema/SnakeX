@@ -5,7 +5,6 @@ import SnakeX.REST.RestEndPoint;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import sun.plugin.dom.core.CoreConstants;
 
 import javax.websocket.Session;
 
