@@ -46,7 +46,8 @@ public class QueueTest {
 
         Player[] players = queue.searchMatch();
 
-        assertNull(players);
+        assertNull(players[0]);
+        assertNull(players[1]);
     }
 
 
@@ -71,7 +72,8 @@ public class QueueTest {
 
         Player[] players = queue.searchMatch();
 
-        assertNull(players);
+        assertNull(players[0]);
+        assertNull(players[1]);
 
     }
 }
