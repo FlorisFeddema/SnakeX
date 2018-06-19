@@ -1,5 +1,6 @@
 package SnakeX.Model.Manager;
 
+import SnakeX.Model.Shared.Snake;
 import SnakeX.Model.enums.PlayerStatus;
 
 import javax.websocket.Session;

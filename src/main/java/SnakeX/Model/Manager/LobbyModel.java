@@ -1,6 +1,7 @@
 package SnakeX.Model.Manager;
 
-import SnakeX.Client.Logic.Point;
+import SnakeX.Model.Shared.Point;
+import SnakeX.Model.Shared.Snake;
 import SnakeX.Model.enums.PlayerStatus;
 import SnakeX.Model.enums.ServerStatus;
 import SnakeX.REST.IsRestEndpoint;
@@ -60,6 +61,7 @@ public class LobbyModel implements IsLobby {
                 break;
             }
         }
+
         if (server == null){
             return false;
         }
@@ -67,11 +69,13 @@ public class LobbyModel implements IsLobby {
         Random random = new Random();
         for (int i = 0; i < players.length; i++) {
             Player player = players[i];
-            int x = 1 + random.nextInt(GRIDSIZE/2 - 2) + 5*i;
-            int y = 1 + random.nextInt(GRIDSIZE/2 - 2) + 5*i;
+            int x = 1 + random.nextInt(GRIDSIZE/2 - 2) + 10*i;
+            int y = 1 + random.nextInt(GRIDSIZE/2 - 2) + 10*i;
             Point point = new Point(x, y);
             Snake snake = new Snake(5, point);
             player.setSnake(snake);
+            System.out.println("Manager: x" + x);
+            System.out.println("Manager: y" + y);
         }
 
 
@@ -87,6 +91,7 @@ public class LobbyModel implements IsLobby {
                 json.addProperty("yPlayer", players[i].getSnake().getLastPosition().getY());
                 json.addProperty("xEnemy", players[1-i].getSnake().getLastPosition().getX());
                 json.addProperty("yEnemy", players[1-i].getSnake().getLastPosition().getY());
+                json.addProperty("length", 5);
                 players[i].getSession().getBasicRemote().sendText(json.toString());
             } catch (IOException e) {
                 //ignore
@@ -94,6 +99,22 @@ public class LobbyModel implements IsLobby {
             queue.removeEntry(players[i]);
         }
         server.setStatus(ServerStatus.Busy);
+
+        for (int i = 0; i< players.length; i++){
+            try {
+                JsonObject json = new JsonObject();
+                json.addProperty("spawn", true);
+                json.addProperty("id", players[i].getId());
+                json.addProperty("x", players[i].getSnake().getLastPosition().getX());
+                json.addProperty("y", players[i].getSnake().getLastPosition().getY());
+                json.addProperty("rating", players[i].getRating());
+                json.addProperty("length", 5);
+
+                server.getSession().getBasicRemote().sendText(json.toString());
+            } catch (IOException e) {
+                //ignore
+            }
+        }
 
 
         return true;
@@ -134,6 +155,9 @@ public class LobbyModel implements IsLobby {
     public int loginPlayer(String username, String password, Session session) {
         int id = rest.loginPlayer(username,  password);
         if (id > 0){
+            for (Player player : players){
+                if (player.getId() == id) return Integer.MIN_VALUE;
+            }
             Player player = new Player(session);
             player.setName(username);
             player.setId(id);

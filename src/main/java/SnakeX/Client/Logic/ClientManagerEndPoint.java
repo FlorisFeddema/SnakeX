@@ -3,7 +3,6 @@ package SnakeX.Client.Logic;
 import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.eclipse.jetty.util.Utf8LineParser;
 
 import javax.websocket.*;
 import java.io.IOException;
@@ -17,7 +16,7 @@ import static SnakeX.Shared.Static.keyInJson;
 public class ClientManagerEndPoint implements IsClientManagerEndPoint {
 
     private IsControllerClient client;
-    private Session server;
+    private Session manager, game;
 
     private SynchronousQueue<Integer> playerId;
     private SynchronousQueue<Boolean> register;
@@ -34,8 +33,8 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         try {
 
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            //connects to server
-            server = container.connectToServer(this, uri);
+            //connects to manager
+            manager = container.connectToServer(this, uri);
         } catch (Throwable t) {
         }
     }
@@ -74,7 +73,8 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         int yPlayer = json.get("yPlayer").getAsInt();
         int xEnemy = json.get("xEnemy").getAsInt();
         int yEnemy = json.get("yEnemy").getAsInt();
-        client.joinGame(url, enemy, enemyRating, rating, xPlayer, yPlayer, xEnemy, yEnemy);
+        int length = json.get("length").getAsInt();
+        client.joinGame(url, enemy, enemyRating, rating, xPlayer, yPlayer, xEnemy, yEnemy, length);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         json.addProperty("login", true);
         json.addProperty("username", name);
         json.addProperty("password", hash);
-        server.getBasicRemote().sendText(json.toString());
+        manager.getBasicRemote().sendText(json.toString());
         return playerId.poll(5, TimeUnit.SECONDS);
     }
 
@@ -93,7 +93,7 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         json.addProperty("register", true);
         json.addProperty("username", name);
         json.addProperty("password", hash);
-        server.getBasicRemote().sendText(json.toString());
+        manager.getBasicRemote().sendText(json.toString());
         return register.poll(5, TimeUnit.SECONDS);
     }
 
@@ -102,7 +102,7 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         JsonObject json = new JsonObject();
         json.addProperty("stats", true);
 
-        server.getBasicRemote().sendText(json.toString());
+        manager.getBasicRemote().sendText(json.toString());
         JsonObject result = stats.poll(5, TimeUnit.SECONDS);
         client.setGames(result.get("games").getAsInt());
         client.setWins(result.get("wins").getAsInt());
@@ -113,14 +113,14 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         JsonObject json = new JsonObject();
         json.addProperty("message", true);
         json.addProperty("text", message);
-        server.getBasicRemote().sendText(json.toString());
+        manager.getBasicRemote().sendText(json.toString());
     }
 
     @Override
     public void joinQueue() throws IOException{
         JsonObject json = new JsonObject();
         json.addProperty("queue", true);
-        server.getBasicRemote().sendText(json.toString());
+        manager.getBasicRemote().sendText(json.toString());
     }
 
     private void receiveMessageOther(JsonObject json){
@@ -128,4 +128,6 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
         String message = json.get("text").getAsString();
         client.showMessageOther(name, message);
     }
+
+
 }

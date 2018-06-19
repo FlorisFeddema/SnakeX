@@ -1,16 +1,23 @@
 package SnakeX.Client.Logic;
 
+
+import SnakeX.Model.enums.MoveDirection;
 import SnakeX.Shared.ConsoleColors;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import javax.websocket.*;
+import java.io.IOException;
 import java.net.URI;
+
+import static SnakeX.Shared.Static.keyInJson;
 
 @ClientEndpoint
 public class ClientGameEndPoint implements IsClientGameEndPoint {
     private IsControllerClient client;
     private Session server;
 
-    public ClientGameEndPoint(IsControllerClient client, String url){
+    public ClientGameEndPoint(IsControllerClient client, String url, int id){
         this.client = client;
 
         URI uri = URI.create(url);
@@ -18,6 +25,10 @@ public class ClientGameEndPoint implements IsClientGameEndPoint {
 
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
             server = container.connectToServer(this, uri);
+            JsonObject json = new JsonObject();
+            json.addProperty("connect", true);
+            json.addProperty("id", id);
+            server.getBasicRemote().sendText(json.toString());
         } catch (Throwable t) {
         }
     }
@@ -31,6 +42,29 @@ public class ClientGameEndPoint implements IsClientGameEndPoint {
 
     @OnMessage
     public void onWebSocketText(String message) {
+        JsonObject json = new JsonParser().parse(message).getAsJsonObject();
+        if (keyInJson(json, "move")){
+            move(json);
+        }
     }
+
+    @Override
+     public void sendDirection(MoveDirection direction){
+        JsonObject json = new JsonObject();
+        json.addProperty("direction", direction.toString());
+         try {
+             server.getBasicRemote().sendText(json.toString());
+         } catch (IOException e) {
+             //ignore
+         }
+     }
+
+     private void move(JsonObject json){
+        MoveDirection playerDirection = MoveDirection.valueOf(json.get("player").getAsString());
+        MoveDirection enemyDirection = MoveDirection.valueOf(json.get("enemy").getAsString());
+        boolean playerAlive = json.get("alivePlayer").getAsBoolean();
+        boolean enemyAlive = json.get("aliveEnemy").getAsBoolean();
+        client.move(playerDirection, enemyDirection, playerAlive, enemyAlive);
+     }
 
 }

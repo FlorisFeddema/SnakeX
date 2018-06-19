@@ -1,14 +1,16 @@
 package SnakeX.GameServer;
 
+import SnakeX.Model.Shared.Point;
+import SnakeX.Model.Shared.Snake;
 import SnakeX.Shared.ConsoleColors;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import javax.sound.sampled.Port;
 import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
 
+import static SnakeX.GameServer.GameServer.gameModel;
 import static SnakeX.Shared.Static.keyInJson;
 
 @ClientEndpoint
@@ -48,7 +50,25 @@ public class GameManagerEndPoint implements IsGameManagerEndPoint {
 
 
     @OnMessage
-    public void onWebSocketText(String message) {
+    public void onWebSocketText(String message, Session session) {
+        JsonObject json = new JsonParser().parse(message).getAsJsonObject();
+        if (keyInJson(json, "spawn")) {
+            setPlayer(json);
+        }
     }
+
+    private void setPlayer(JsonObject json){
+        int id = json.get("id").getAsInt();
+        int x = json.get("x").getAsInt();
+        int y = json.get("y").getAsInt();
+        int rating = json.get("rating").getAsInt();
+        int length = json.get("length").getAsInt();
+        Point point = new Point(x, y);
+        Snake snake = new Snake(5, point, id);
+        gameModel.setPlayer(snake);
+
+    }
+
+
 
 }

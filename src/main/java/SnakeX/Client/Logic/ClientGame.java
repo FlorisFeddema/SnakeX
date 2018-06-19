@@ -2,7 +2,8 @@ package SnakeX.Client.Logic;
 
 import SnakeX.Client.UI.IsGameController;
 import SnakeX.Client.UI.IsMainController;
-import SnakeX.Model.Manager.Snake;
+import SnakeX.Model.Shared.Point;
+import SnakeX.Model.Shared.Snake;
 import SnakeX.Model.enums.MoveDirection;
 import javafx.scene.paint.Color;
 
@@ -92,7 +93,16 @@ public class ClientGame implements IsClient, IsControllerClient {
 
     @Override
     public void move(MoveDirection direction) {
-        //TODO
+        if (direction.isHorizonal() ^ player.getDirection().isHorizonal()){
+            gameEndPoint.sendDirection(direction);
+            player.setDirection(direction);
+        }
+    }
+
+    @Override
+    public void connectGame() {
+        gameEndPoint = new ClientGameEndPoint(this, gameUrl, id);
+
     }
 
     @Override
@@ -101,11 +111,21 @@ public class ClientGame implements IsClient, IsControllerClient {
     }
 
     @Override
-    public void joinGame(String url, String enemy, int enemyRating, int rating, int xPlayer, int yPlayer, int xEnemy, int yEnemy) {
+    public void joinGame(String url, String enemy, int enemyRating, int rating, int xPlayer, int yPlayer, int xEnemy, int yEnemy, int length) {
         gameUrl = url;
-        player = new Snake(Color.BLACK, 5, new Point(xPlayer, yPlayer), "You", rating);
-        this.enemy = new Snake(Color.RED, 5, new Point(xEnemy, yEnemy), enemy, enemyRating);
-        gameEndPoint = new ClientGameEndPoint(this, url);
+        player = new Snake(Color.BLACK, length, new Point(xPlayer, yPlayer), "You", rating);
+        this.enemy = new Snake(Color.RED, length, new Point(xEnemy, yEnemy), enemy, enemyRating);
         mainController.joinGame();
+    }
+
+    @Override
+    public void move(MoveDirection playerDirection, MoveDirection enemyDirection, boolean playerAlive, boolean enemyAlive) {
+        if (!playerAlive || !enemyAlive){
+            player.move(playerDirection);
+            enemy.move(enemyDirection);
+            gameController.move(new Snake[] {player, enemy});
+        } else {
+            System.out.println("Somebody won");
+        }
     }
 }

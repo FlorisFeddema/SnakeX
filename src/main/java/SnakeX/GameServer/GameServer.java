@@ -2,6 +2,7 @@ package SnakeX.GameServer;
 
 import SnakeX.ManagerServer.ManagerEndPoint;
 import SnakeX.Model.Game.GameModel;
+import SnakeX.Model.Game.IsGameModel;
 import SnakeX.Shared.ConsoleColors;
 import SnakeX.Shared.Static;
 import org.eclipse.jetty.server.Server;
@@ -15,7 +16,7 @@ import javax.websocket.server.ServerContainer;
 public class GameServer {
 
     static int port;
-    static GameModel gameModel;
+    static IsGameModel gameModel;
 
     public static void main(String[] args) {
 

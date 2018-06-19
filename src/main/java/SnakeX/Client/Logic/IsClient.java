@@ -2,7 +2,7 @@ package SnakeX.Client.Logic;
 
 import SnakeX.Client.UI.IsGameController;
 import SnakeX.Client.UI.IsMainController;
-import SnakeX.Model.Manager.Snake;
+import SnakeX.Model.Shared.Snake;
 import SnakeX.Model.enums.MoveDirection;
 
 import java.io.IOException;
@@ -32,4 +32,6 @@ public interface IsClient {
     void joinQueue() throws IOException;
 
     void move(MoveDirection direction);
+
+    void connectGame();
 }

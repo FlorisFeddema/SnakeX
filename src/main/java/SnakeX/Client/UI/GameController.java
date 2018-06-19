@@ -1,8 +1,8 @@
 package SnakeX.Client.UI;
 
 import SnakeX.Client.Logic.IsClient;
-import SnakeX.Client.Logic.Point;
-import SnakeX.Model.Manager.Snake;
+import SnakeX.Model.Shared.Point;
+import SnakeX.Model.Shared.Snake;
 import SnakeX.Model.enums.MoveDirection;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -69,20 +69,17 @@ public class GameController extends Controller implements IsGameController{
                 client.move(MoveDirection.Right);
             }
         });
+
+        client.connectGame();
     }
 
     private void setupMatchDetails(){
         LblEnemyElo.setText(Integer.toString(client.getEnemy().getRating()));
         LblYourElo.setText(Integer.toString(client.getPlayer().getRating()));
         LblEnemyName.setText(client.getEnemy().getName());
+        move(new Snake[]{client.getPlayer(), client.getEnemy()});
     }
 
-
-    public void spawn(Snake snake){
-        int x = snake.getPositions().get(0).getX();
-        int y = snake.getPositions().get(0).getY();
-        grid[x][y].setFill(client.getPlayer().getColor());
-    }
 
     public void move(Snake[] snakes){
         for (Rectangle[] i: grid) {

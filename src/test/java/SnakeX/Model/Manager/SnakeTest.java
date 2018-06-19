@@ -1,6 +1,7 @@
 package SnakeX.Model.Manager;
 
-import SnakeX.Client.Logic.Point;
+import SnakeX.Model.Shared.Point;
+import SnakeX.Model.Shared.Snake;
 import SnakeX.Model.enums.MoveDirection;
 import javafx.scene.paint.Color;
 import org.junit.Before;

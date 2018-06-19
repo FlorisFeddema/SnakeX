@@ -1,7 +1,7 @@
 package SnakeX.Client.UI;
 
 
-import SnakeX.Model.Manager.Snake;
+import SnakeX.Model.Shared.Snake;
 
 public interface IsGameController {
 
@@ -10,11 +10,6 @@ public interface IsGameController {
      */
     void setupGrid();
 
-    /***
-     * Spawns a snake at the position on the GUI
-     * @param snake snake to spawn
-     */
-    void spawn(Snake snake);
 
     /***
      * updates the position of the snakes on the GUI
