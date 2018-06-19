@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SnakeX">
+    <output-path>$PROJECT_DIR$/out/artifacts/SnakeX</output-path>
+    <root id="archive" name="SnakeX.jar" />
+  </artifact>
+</component>
