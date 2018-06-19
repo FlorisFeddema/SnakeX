@@ -5,25 +5,40 @@ import SnakeX.Model.Shared.Snake;
 import SnakeX.Model.enums.PlayerStatus;
 import SnakeX.Model.enums.ServerStatus;
 import SnakeX.REST.IsRestEndpoint;
-import SnakeX.REST.RestEndPoint;
 import com.google.gson.JsonObject;
 
+import javax.validation.constraints.Null;
 import javax.websocket.Session;
 import java.io.IOException;
 import java.util.*;
 
 public class LobbyModel implements IsLobby {
     private static final int GRIDSIZE = 20;
+
+    public IsChat getChat() {
+        return chat;
+    }
+
     private IsChat chat;
+
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
     private Set<Player> players;
     private IsRestEndpoint rest;
     private Queue queue;
     private Timer queueTimer;
+
+    public Set<ServerEntry> getServers() {
+        return servers;
+    }
+
     private Set<ServerEntry> servers;
 
-    public LobbyModel(){
+    public LobbyModel(IsRestEndpoint rest){
         players = new HashSet<>();
-        rest = new RestEndPoint();
+        this.rest = rest;
         chat = new Chat();
         queue = new Queue();
         servers = new HashSet<>();
@@ -41,8 +56,9 @@ public class LobbyModel implements IsLobby {
         servers.add(entry);
     }
 
-    private void checkQueue(){
-        Player[] players = null;
+    public void checkQueue(){
+        Player[] players;
+        System.out.println(getPlayers().size());
         while ((players = queue.searchMatch()) != null){
             if (!joinGame(players)){
                 for (Player i : players){
@@ -68,6 +84,7 @@ public class LobbyModel implements IsLobby {
 
         Random random = new Random();
         for (int i = 0; i < players.length; i++) {
+            players[i].setStatus(PlayerStatus.Playing);
             Player player = players[i];
             int x = 1 + random.nextInt(GRIDSIZE/2 - 2) + 10*i;
             int y = 1 + random.nextInt(GRIDSIZE/2 - 2) + 10*i;
@@ -95,6 +112,8 @@ public class LobbyModel implements IsLobby {
                 players[i].getSession().getBasicRemote().sendText(json.toString());
             } catch (IOException e) {
                 //ignore
+            } catch (NullPointerException e){
+                //ignore
             }
             queue.removeEntry(players[i]);
         }
@@ -112,6 +131,8 @@ public class LobbyModel implements IsLobby {
 
                 server.getSession().getBasicRemote().sendText(json.toString());
             } catch (IOException e) {
+                //ignore
+            } catch (NullPointerException e){
                 //ignore
             }
         }

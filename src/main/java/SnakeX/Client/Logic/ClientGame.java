@@ -128,6 +128,8 @@ public class ClientGame implements IsClient, IsControllerClient {
             enemy.move(enemyDirection);
             gameController.move(new Snake[] {player, enemy});
         } else {
+            gameEndPoint.disconnect();
+            gameEndPoint = null;
             if (result == GameResult.Won){
                 gameController.showWin();
             } else if (result == GameResult.Loss){

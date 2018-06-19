@@ -12,6 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.io.IOException;
+
 public class GameController extends Controller implements IsGameController{
 
     public Label LblEnemyName;
@@ -101,18 +103,29 @@ public class GameController extends Controller implements IsGameController{
     public void showWin(){
         Platform.runLater(() -> {
             showAlert("You won!", "Winner");
+            loadMainMenu();
         });
     }
 
     public void showLoss(){
         Platform.runLater(() -> {
             showAlert("You lost!", "Loser");
+            loadMainMenu();
         });
     }
 
     public void showDraw(){
         Platform.runLater(() -> {
             showAlert("It is a draw", "Draw");
+            loadMainMenu();
         });
+    }
+
+    private void loadMainMenu(){
+        try {
+            changeScene("Main", client);
+        } catch (IOException e) {
+            //ignore
+        }
     }
 }

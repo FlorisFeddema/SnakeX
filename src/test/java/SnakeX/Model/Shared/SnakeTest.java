@@ -1,18 +1,22 @@
-package SnakeX.Model.Manager;
+package SnakeX.Model.Shared;
 
-import SnakeX.Model.Shared.Point;
-import SnakeX.Model.Shared.Snake;
+import SnakeX.Model.enums.GameResult;
 import SnakeX.Model.enums.MoveDirection;
 import javafx.scene.paint.Color;
+import org.checkerframework.checker.nullness.compatqual.PolyNullType;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.websocket.Session;
+
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class SnakeTest {
 
     Snake snake1;
     Snake snake2;
+    Snake snake3;
     Point point;
 
     @Before
@@ -20,6 +24,7 @@ public class SnakeTest {
         point = new Point(2, 5 );
         snake1 = new Snake(Color.BLACK, 5, point, "test", 1500);
         snake2 = new Snake(5, point);
+        snake3 = new Snake(5, point, 2);
     }
 
     @Test
@@ -74,5 +79,55 @@ public class SnakeTest {
 
         assertEquals(2, snake1.getLastPosition().getX());
         assertEquals(5, snake1.getLastPosition().getY());
+    }
+
+    @Test
+    public void isAlive() {
+        assertTrue(snake1.isAlive());
+        snake1.setAlive(false);
+        assertFalse(snake1.isAlive());
+    }
+
+    @Test
+    public void getSession() {
+        Session session = mock(Session.class);
+        snake1.setSession(session);
+        assertSame(session, snake1.getSession());
+        assertNull(snake2.getSession());
+    }
+
+    @Test
+    public void getId() {
+        assertEquals(2, snake3.getId());
+    }
+
+    @Test
+    public void getResult() {
+        assertEquals(GameResult.None, snake1.getResult());
+        snake1.setResult(GameResult.Won);
+        assertEquals(GameResult.Won, snake1.getResult());
+    }
+
+    @Test
+    public void getDirection() {
+        assertEquals(MoveDirection.Up, snake1.getDirection());
+        snake1.setDirection(MoveDirection.Down);
+        assertEquals(MoveDirection.Down, snake1.getDirection());
+        snake1.setDirection(MoveDirection.Left);
+        assertEquals(MoveDirection.Left, snake1.getDirection());
+    }
+
+    @Test
+    public void grow() {
+        int length = snake1.getMaxLength();
+        snake1.grow();
+        assertEquals(length + 1, snake1.getMaxLength());
+    }
+
+    @Test
+    public void isOnSnake() {
+        Point point2 = new Point(15, 8);
+        assertFalse(snake1.isOnSnake(point2));
+        assertTrue(snake1.isOnSnake(point));
     }
 }

@@ -1,5 +1,6 @@
 package SnakeX.Model.Shared;
 
+import SnakeX.Model.enums.GameResult;
 import SnakeX.Model.enums.MoveDirection;
 import javafx.scene.paint.Color;
 
@@ -11,18 +12,18 @@ public class Snake {
     private Color color;
     private String name;
     private int rating;
-
     private int id;
-
     private Session session;
-
-
     private boolean alive;
-
     private int length;
     private int maxLength;
     private List<Point> positions;
     private MoveDirection direction;
+    private GameResult result;
+
+    public int getMaxLength() {
+        return maxLength;
+    }
 
     public boolean isAlive() {
         return alive;
@@ -60,6 +61,14 @@ public class Snake {
         return positions;
     }
 
+    public GameResult getResult() {
+        return result;
+    }
+
+    public void setResult(GameResult result) {
+        this.result = result;
+    }
+
     public Point getLastPosition() {
         return positions.get(positions.size() - 1);
     }
@@ -83,6 +92,7 @@ public class Snake {
         id = Integer.MIN_VALUE;
         direction = MoveDirection.Up;
         alive = true;
+        result = GameResult.None;
     }
 
     public Snake(int maxLength, Point point) {
@@ -93,6 +103,7 @@ public class Snake {
         id = Integer.MIN_VALUE;
         direction = MoveDirection.Up;
         alive = true;
+        result = GameResult.None;
     }
 
     public Snake(int maxLength, Point point, int id) {
@@ -104,6 +115,7 @@ public class Snake {
 
         direction = MoveDirection.Up;
         alive = true;
+        result = GameResult.None;
 
     }
 
@@ -141,15 +153,12 @@ public class Snake {
         return next;
     }
 
-    public boolean isOnSnake(Point point){
-        for (Point p : positions){
+    public boolean isOnSnake(Point point) {
+        for (Point p : positions) {
             if (p.x == point.x && p.y == point.y)
                 return true;
         }
         return false;
     }
-
-
-
 
 }

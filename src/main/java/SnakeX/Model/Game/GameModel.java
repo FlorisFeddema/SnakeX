@@ -125,6 +125,24 @@ public class GameModel implements IsGameModel {
                 //ignore
             }
         }
+        checkGameEnd();
     }
 
+    private void checkGameEnd(){
+        for (Snake snake : players){
+            if (snake.getResult() == GameResult.None)
+                return;
+        }
+
+        //TODO GAME DONE BBY HANDLE THIS PLEAS
+
+
+
+
+        resetServer();
+    }
+
+    private void resetServer(){
+
+    }
 }

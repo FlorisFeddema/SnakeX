@@ -60,7 +60,16 @@ public class ClientGameEndPoint implements IsClientGameEndPoint {
          }
      }
 
-     private void move(JsonObject json){
+    @Override
+    public void disconnect() {
+        try {
+            server.close();
+        } catch (IOException e) {
+            //ignore
+        }
+    }
+
+    private void move(JsonObject json){
         MoveDirection playerDirection = MoveDirection.valueOf(json.get("player").getAsString());
         MoveDirection enemyDirection = MoveDirection.valueOf(json.get("enemy").getAsString());
         GameResult result = GameResult.valueOf(json.get("result").getAsString());

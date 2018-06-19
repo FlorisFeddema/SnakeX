@@ -35,6 +35,6 @@ public abstract class Controller{
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(header);
         alert.setContentText(message);
-        alert.show();
+        alert.showAndWait();
     }
 }
