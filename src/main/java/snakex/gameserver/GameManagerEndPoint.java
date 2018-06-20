@@ -17,7 +17,7 @@ public class GameManagerEndPoint implements IsGameManagerEndPoint {
     Session server;
 
     public GameManagerEndPoint(String url) {
-        URI uri = URI.create("ws://localhost:9900/snake/manager/");
+        URI uri = URI.create("ws://217.105.43.173:9900/snake/manager/");
         try {
 
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
