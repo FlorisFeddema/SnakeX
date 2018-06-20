@@ -1,6 +1,5 @@
 package snakex.shared;
 
-import snakex.client.ui.Client;
 import snakex.gameserver.GameServer;
 import snakex.managerserver.ManagerServer;
 
