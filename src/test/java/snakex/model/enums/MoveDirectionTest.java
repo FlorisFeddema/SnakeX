@@ -27,4 +27,12 @@ public class MoveDirectionTest {
         assertTrue(left.isHorizonal());
         assertTrue(right.isHorizonal());
     }
+
+    @Test
+    public void getOpposite() {
+        assertEquals(up, MoveDirection.getOpposite(down));
+        assertEquals(down, MoveDirection.getOpposite(up));
+        assertEquals(left, MoveDirection.getOpposite(right));
+        assertEquals(right, MoveDirection.getOpposite(left));
+    }
 }
