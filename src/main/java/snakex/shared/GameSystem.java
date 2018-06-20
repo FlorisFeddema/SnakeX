@@ -20,14 +20,5 @@ public class GameSystem {
             String[] args = {"9905"};
             GameServer.main(args);
         }).start();
-
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            Thread.currentThread().interrupt();
-//        }
-//
-//        new Thread(() -> Client.main(null)).start();
-
     }
 }

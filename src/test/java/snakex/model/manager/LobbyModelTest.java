@@ -88,13 +88,13 @@ public class LobbyModelTest {
     @Test
     public void loginPlayer() {
         int id = lobby.loginPlayer(correct, correct, session);
-        assertEquals(id, 5);
+        assertEquals(5, id);
 
         id = lobby.loginPlayer(correct, correct, session);
-        assertEquals(id, Integer.MIN_VALUE);
+        assertEquals(Integer.MIN_VALUE, id);
 
         id = lobby.loginPlayer(incorrect, incorrect, session);
-        assertEquals(id, Integer.MIN_VALUE);
+        assertEquals(Integer.MIN_VALUE, id);
     }
 
     @Test
