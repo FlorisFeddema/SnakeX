@@ -100,9 +100,8 @@ public class ClientGame implements IsClient, IsControllerClient {
 
     @Override
     public void move(MoveDirection direction) {
-        if (direction.isHorizonal() ^ player.getDirection().isHorizonal()){
+        if (MoveDirection.getOpposite(direction) != player.getDirection()){
             gameEndPoint.sendDirection(direction);
-            player.setDirection(direction);
         }
     }
 
@@ -128,6 +127,7 @@ public class ClientGame implements IsClient, IsControllerClient {
     @Override
     public void move(MoveDirection playerDirection, MoveDirection enemyDirection, GameResult result) {
         if (result == GameResult.NONE){
+            player.setDirection(playerDirection);
             player.move(playerDirection);
             enemy.move(enemyDirection);
             gameController.move(new Snake[] {player, enemy});

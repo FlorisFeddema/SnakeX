@@ -3,6 +3,7 @@ package snakex.model.shared;
 import snakex.model.enums.GameResult;
 import snakex.model.enums.MoveDirection;
 import javafx.scene.paint.Color;
+import sun.jvm.hotspot.runtime.posix.POSIXSignals;
 
 import javax.websocket.Session;
 import java.util.ArrayList;
@@ -154,10 +155,17 @@ public class Snake {
         return next;
     }
 
-    public boolean isOnSnake(Point point) {
-        for (Point p : positions) {
-            if (p.x == point.x && p.y == point.y)
-                return true;
+    public boolean isOnSnake(Point point, boolean isPlayer) {
+        for (int i = 0; i < positions.size(); i++) {
+            if (isPlayer && i == positions.size() - 1){
+                   //ignore
+            } else {
+                Point p = positions.get(i);
+                if (p.x == point.x && p.y == point.y){
+                    return true;
+                }
+            }
+
         }
         return false;
     }

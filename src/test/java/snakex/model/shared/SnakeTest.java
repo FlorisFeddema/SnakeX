@@ -126,7 +126,7 @@ public class SnakeTest {
     @Test
     public void isOnSnake() {
         Point point2 = new Point(15, 8);
-        assertFalse(snake1.isOnSnake(point2));
-        assertTrue(snake1.isOnSnake(point));
+        assertFalse(snake1.isOnSnake(point2, false));
+        assertTrue(snake1.isOnSnake(point, false));
     }
 }

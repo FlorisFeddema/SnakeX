@@ -64,7 +64,7 @@ public class GameModel implements IsGameModel {
             int x = random.nextInt(20);
             int y = random.nextInt(20);
             point = new Point(x, y);
-            done = !players.get(0).isOnSnake(point) && !players.get(1).isOnSnake(point);
+            done = !players.get(0).isOnSnake(point, false) && !players.get(1).isOnSnake(point, false);
         }
 
         powerUp = point;
@@ -122,23 +122,8 @@ public class GameModel implements IsGameModel {
         for (int i = 0; i < players.size(); i++) {
             Snake snake = players.get(i);
             snake.move(snake.getDirection());
-            if (snake.isOnSnake(powerUp)) {
+            if (snake.isOnSnake(powerUp, false)) {
                 sendPowerUpPickup(players.get(i), players.get(1-i));
-            }
-        }
-
-        for (Snake snake : players){
-            Point point = snake.getLastPosition();
-            if (!point.isOnGrid()){
-                snake.setAlive(false);
-                break;
-            } else {
-                for (Snake s : players){
-                    if (s.isOnSnake(point) && s != snake){
-                        snake.setAlive(false);
-                        break;
-                    }
-                }
             }
         }
         gameSteps++;
@@ -147,6 +132,20 @@ public class GameModel implements IsGameModel {
     }
 
     private void checkAlive(){
+        for (Snake snake : players){
+            Point point = snake.getLastPosition();
+            if (!point.isOnGrid()){
+                snake.setAlive(false);
+                break;
+            } else {
+                for (Snake s : players){
+                    if (s.isOnSnake(point, s == snake)){
+                        snake.setAlive(false);
+                        break;
+                    }
+                }
+            }
+        }
         for (Snake snake : players){
             if (!snake.isAlive()){
                 gameTimer.cancel();
