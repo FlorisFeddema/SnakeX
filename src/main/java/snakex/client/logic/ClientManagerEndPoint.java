@@ -29,7 +29,7 @@ public class ClientManagerEndPoint implements IsClientManagerEndPoint {
 
         this.client = client;
 
-        URI uri = URI.create("ws://localhost:9900/snake/manager/");
+        URI uri = URI.create("ws://217.105.43.173:9900/snake/manager/");
         try {
 
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();

@@ -9,5 +9,8 @@
         <module name="SnakeX" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SnakeX" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

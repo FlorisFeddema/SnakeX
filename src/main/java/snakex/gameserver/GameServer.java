@@ -25,7 +25,7 @@ public class GameServer {
         } catch (ArrayIndexOutOfBoundsException e){
             //ignore
         }
-        String url = "ws://localhost:" + port + "/snake/game/";
+        String url = "ws://217.105.43.173:" + port + "/snake/game/";
         gameModel = new GameModel(url, new GameRestEndPoint());
 
 

@@ -3,7 +3,6 @@ package snakex.model.shared;
 import snakex.model.enums.GameResult;
 import snakex.model.enums.MoveDirection;
 import javafx.scene.paint.Color;
-import sun.jvm.hotspot.runtime.posix.POSIXSignals;
 
 import javax.websocket.Session;
 import java.util.ArrayList;
